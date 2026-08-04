@@ -1,13 +1,22 @@
 
-# YAP/TAZ 과활성화는 비만 관련 암 위험의 핵심 기전인가: Hippo 경로 이중성과 대사 조절 전략의 재탐색
+import streamlit as st
+import streamlit.components.v1 as components
 
+st.set_page_config(page_title="YAP/TAZ 탐구보고서", layout="wide")
+
+TITLE = "YAP/TAZ 과활성화는 비만 관련 암 위험의 핵심 기전인가"
+SUBTITLE = "Hippo 경로 이중성과 대사 조절 전략의 재탐색"
+
+SECTION_INTRO = """
 ## 1. 서론: 탐구 동기 및 목적
 
 2학년 진로활동에서 예방적 관점의 비만 치료 전략으로 Hippo 경로 조절, 구체적으로는 LATS 억제를 통한 YAP/TAZ 활성화 유도 방안을 제안한 바 있다. 그러나 이 제안을 되짚어보는 과정에서, YAP/TAZ가 다수의 암종에서 종양원성 인자로 보고되어 있다는 사실을 접하면서 하나의 의문이 생겼다. 지방세포의 YAP/TAZ를 인위적으로 활성화하는 전략이 비만은 개선하되 암 발병 위험을 함께 높이는 것은 아닌가 하는 것이었다. 이 문제의식은 곧 검증 가능한 가설로 구체화되었다. 'YAP/TAZ 활성도가 높을수록 암 발병률도 높게 나타날 것이다'라는 가설을 세우고, 이를 공개된 대규모 유전자 발현 데이터베이스를 통해 실제로 검증해 보고자 한 것이 이 탐구의 출발점이다.
 
 아래 그림은 문제의식에서 최종 결론에 이르기까지 탐구가 전개된 전체 흐름을 나타낸 것이다.
+"""
 
-<svg viewBox="0 0 780 1070" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+DIAGRAM_1_SVG = """
+<svg viewBox="0 0 780 1070" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" width="100%">
   <defs>
     <marker id="arrow1" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L0,6 L8,3 z" fill="#4a6fa5"/>
@@ -57,7 +66,9 @@
   <text x="60" y="990" font-size="13" fill="#333">단일 분자 표적을 조작하는 대신</text>
   <text x="60" y="1010" font-size="13" fill="#333">자가포식 · 간헐적 단식 · 생체시계 리듬 기반 대사 조절 제안</text>
 </svg>
+"""
 
+SECTION_BACKGROUND = """
 ## 2. 이론적 배경
 
 ### 2.1 Hippo 신호전달경로와 YAP/TAZ
@@ -97,8 +108,10 @@ GEPIA2의 TCGA 범암 데이터를 이용해 CTGF·CYR61·WWTR1의 발현량을 
 ### 5.2 YAP/TAZ의 이중적 역할이 갖는 함의
 
 원인 분석과 별개로, YAP/TAZ가 세포 안에서 수행하는 역할 자체가 단순히 '증식 촉진'으로 환원되지 않는다는 점도 확인하였다. YAP/TAZ는 핵 내에서 TEAD와 결합해 증식 관련 유전자 발현을 촉진하는 동시에, 세포사멸 관련 경로에도 관여해 생존 신호를 강화하는 것으로 보고되어 있다(LeBlanc, Ramirez & Kim, 2021). 즉 증식 촉진과 생존·사멸 조절은 YAP/TAZ가 수행하는 서로 구별되는 두 축이다. 아래 그림은 이 두 축이 하나의 상류 신호(TEAD 결합)에서 갈라져 나가는 구조를 나타낸 것이다.
+"""
 
-<svg viewBox="0 0 760 720" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+DIAGRAM_2_SVG = """
+<svg viewBox="0 0 760 720" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" width="100%">
   <defs>
     <marker id="arrow2" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L0,6 L8,3 z" fill="#4a6fa5"/>
@@ -148,7 +161,9 @@ GEPIA2의 TCGA 범암 데이터를 이용해 CTGF·CYR61·WWTR1의 발현량을 
   <text x="380" y="642" font-size="12.5" text-anchor="middle" fill="#333">세포 분열 활성도(증식 축)만 측정하면 생존 축(BIM 억제)의 기여를 놓치게 되어,</text>
   <text x="380" y="662" font-size="12.5" text-anchor="middle" fill="#333">단일 지표만으로는 YAP/TAZ의 전체 종양원성과 암 발생률을 단정할 수 없다.</text>
 </svg>
+"""
 
+SECTION_END = """
 세포 분열 활성도만으로 암 발생률을 단정할 수 없다는 결론은 이 두 축의 분기 구조에서 자연스럽게 도출된다.
 
 ### 5.3 탐구의 한계
@@ -163,9 +178,21 @@ GEPIA2의 TCGA 범암 데이터를 이용해 CTGF·CYR61·WWTR1의 발현량을 
 
 ## 참고문헌
 
-1. Tang, Z., Kang, B., Li, C., Chen, T., & Zhang, Z. (2019). GEPIA2: an enhanced web server for large-scale expression profiling and interactive analysis. *Nucleic Acids Research*, 47(W1), W556–W560.
-2. Zanconato, F., Cordenonsi, M., & Piccolo, S. (2016). YAP/TAZ at the roots of cancer. *Cancer Cell*, 29(6), 783–803.
-3. Meng, Z., Moroishi, T., & Guan, K. L. (2016). Mechanisms of Hippo pathway regulation. *Genes & Development*, 30(1), 1–17.
+1. Tang, Z., Kang, B., Li, C., Chen, T., & Zhang, Z. (2019). GEPIA2: an enhanced web server for large-scale expression profiling and interactive analysis. *Nucleic Acids Research*, 47(W1), W556-W560.
+2. Zanconato, F., Cordenonsi, M., & Piccolo, S. (2016). YAP/TAZ at the roots of cancer. *Cancer Cell*, 29(6), 783-803.
+3. Meng, Z., Moroishi, T., & Guan, K. L. (2016). Mechanisms of Hippo pathway regulation. *Genes & Development*, 30(1), 1-17.
 4. LeBlanc, L., Ramirez, N., & Kim, J. (2021). Context-dependent roles of YAP/TAZ in stem cell fates and cancer. *Cellular and Molecular Life Sciences*, 78.
-5. Bhaskaran, K., Douglas, I., Forbes, H., dos-Santos-Silva, I., Leon, D. A., & Smeeth, L. (2014). Body-mass index and risk of 22 specific cancers: a population-based cohort study of 5·24 million UK adults. *The Lancet*, 384(9945), 755–765.
-6. de Cabo, R., & Mattson, M. P. (2019). Effects of Intermittent Fasting on Health, Aging, and Disease. *New England Journal of Medicine*, 381(26), 2541–2551.
+5. Bhaskaran, K., Douglas, I., Forbes, H., dos-Santos-Silva, I., Leon, D. A., & Smeeth, L. (2014). Body-mass index and risk of 22 specific cancers: a population-based cohort study of 5.24 million UK adults. *The Lancet*, 384(9945), 755-765.
+6. de Cabo, R., & Mattson, M. P. (2019). Effects of Intermittent Fasting on Health, Aging, and Disease. *New England Journal of Medicine*, 381(26), 2541-2551.
+"""
+
+st.title(TITLE)
+st.caption(SUBTITLE)
+
+st.markdown(SECTION_INTRO)
+components.html(DIAGRAM_1_SVG, height=1100, scrolling=True)
+
+st.markdown(SECTION_BACKGROUND)
+components.html(DIAGRAM_2_SVG, height=750, scrolling=True)
+
+st.markdown(SECTION_END)
